@@ -37,7 +37,7 @@ for i=1:length(dinfo)
     backdetect = 0;
     high = fix(length(dcm_eq(:,1))/10);
     wide = fix(length(dcm_eq(1,:))/10);
-    if mean(dcm_eq(:,end-39:end),'all') > 127
+    if mean(dcm_eq(:,end-wide+1:end),'all') > 127
         backdetect = backdetect + 1;
     end
     if mean(dcm_eq(:,1:wide),'all') > 127
@@ -46,7 +46,7 @@ for i=1:length(dinfo)
     if mean(dcm_eq(1:high,:),'all') > 127
         backdetect = backdetect + 1;
     end
-    if mean(dcm_eq(:,end-wide+1:end),'all') < 127
+    if mean(dcm_eq(:,end-high+1:end),'all') < 127
         backdetect = backdetect + 1;
     end
     if backdetect > 2
