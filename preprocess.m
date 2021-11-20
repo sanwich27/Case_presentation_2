@@ -33,6 +33,26 @@ for i=1:length(dinfo)
     dcm_denoise = imbilatfilt(dcm);
     % noamalize contrast
     dcm_eq = histeq(dcm);
+    % backdetect
+    backdetect = 0;
+    high = fix(length(dcm_eq(:,1))/10);
+    wide = fix(length(dcm_eq(1,:))/10);
+    if mean(dcm_eq(:,end-39:end),'all') > 127
+        backdetect = backdetect + 1;
+    end
+    if mean(dcm_eq(:,1:wide),'all') > 127
+        backdetect = backdetect + 1;
+    end
+    if mean(dcm_eq(1:high,:),'all') > 127
+        backdetect = backdetect + 1;
+    end
+    if mean(dcm_eq(:,end-wide+1:end),'all') < 127
+        backdetect = backdetect + 1;
+    end
+    if backdetect > 2
+        dcm_eq = 255-dcm_eq;
+    end
+        
     dcm_resize = imresize(dcm,[224 224]);
     dcm_denoise_resize = imresize(dcm_denoise,[224 224]);
     dcm_eq_resize = imresize(dcm_eq,[224 224]);
