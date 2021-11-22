@@ -29,36 +29,28 @@ for i=1:length(dinfo)
     files{i} = dinfo3(3).name;
     dcm = dicomread(fullfile(filelocation{i},files{i}));
     dcm = im2uint8(dcm);
-    % backdetect
+    % noamalize contrast
+    dcm_eq = histeq(dcm);
     backdetect = 0;
-    high = fix(length(dcm(:,1))/10);
-    wide = fix(length(dcm(1,:))/10);
-    if mean(dcm(:,end-wide+1:end),'all') > 127
+    high = fix(length(dcm_eq(:,1))/10);
+    wide = fix(length(dcm_eq(1,:))/10);
+    if mean(dcm_eq(:,end-wide+1:end),'all') > 127
         backdetect = backdetect + 1;
     end
-    if mean(dcm(:,1:wide),'all') > 127
+    if mean(dcm_eq(:,1:wide),'all') > 127
         backdetect = backdetect + 1;
     end
-    if mean(dcm(1:high,:),'all') > 127
+    if mean(dcm_eq(1:high,:),'all') > 127
         backdetect = backdetect + 1;
     end
-    if mean(dcm(:,end-high+1:end),'all') < 127
+    if mean(dcm_eq(:,end-high+1:end),'all') < 127
         backdetect = backdetect + 1;
     end
     if backdetect > 2
-        dcm_bd = 255-dcm;
+        dcm_eq = 255-dcm_eq;
     end
-    % denoise
-    dcm_denoise = imbilatfilt(dcm_bd);
-    % noamalize contrast
-    dcm_eq = histeq(dcm_bd)；
-    
-    dcm_resize = imresize(dcm_bd,[224 224]);
-    dcm_denoise_resize = imresize(dcm_denoise,[224 224]);
     dcm_eq_resize = imresize(dcm_eq,[224 224]);
-    
-    output = cat(3,dcm_eq_resize,dcm_resize,dcm_denoise_resize);
-    %output = cat(3,dcm_eq_resize,dcm_eq_resize,dcm_eq_resize);
+    output = cat(3,dcm_eq_resize,dcm_eq_resize,dcm_eq_resize);
     if sum(contains(files{i},Negative_ID)) == 1
         dicomwrite(output,[pwd,'\0\',files{i}]);
     elseif sum(contains(files{i},Typical_ID)) == 1
