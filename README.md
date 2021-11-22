@@ -16,4 +16,22 @@ Step 1. run preprocess.m
 Step 2. run preprocess_valid.m  
 Step 3. run training_googlenet.m   
   
-說明:Step 1及Step 2對影像進行前處理，用來產生欲訓練model所需的檔案；Step 3用來訓練model
+說明:  
+Step 1及Step 2對影像進行前處理，用來產生欲訓練model所需的檔案；Step 3用來訓練model
+其中training_googlenet.m所使用的pretrained model是[googlenet](https://www.mathworks.com/help/deeplearning/ref/googlenet.html)
+1. [hyperparameter](https://www.mathworks.com/help/deeplearning/ref/trainingoptions.html):  
+- MiniBatchSize: 32  
+- MaxEpochs: 20  
+- InitialLearnRate: 1e-3  
+- LearnRateSchedule: piecewise  
+- LearnRateDropPeriod: 4  
+- L2Regularization: 0.1      
+2. [data augmentation](https://www.mathworks.com/help/deeplearning/ref/imagedataaugmenter.html):  
+- RandXReflection: true
+- RandScale: [1 1.2]
+- RandXTranslation: [-20 20]
+- RandYTranslation: [-20 20]
+- RandRotation: [-20 20])  
+
+結果:  
+Public Leaderboard: 0.54285
