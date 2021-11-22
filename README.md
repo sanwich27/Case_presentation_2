@@ -8,7 +8,7 @@ Topic: COVID-19 Detection (to classify the typical / atypical pneumonia)
 本次程式運作環境: matlab R2021a  
 prerequisite toolbox: image processing toolbox, deep learning toolbox  
 
-將以下流程所需的檔案放在與data資料夾、data_info.csv、sample_submission.csv同一層即可運作  
+將以下流程所需的檔案放在與 data 資料夾、data_info.csv、sample_submission.csv 同一層即可運作  
 所有程式讀取檔案的路徑都是寫死的，請確保在本層沒有新增額外的資料夾  
 
 流程:  
@@ -17,8 +17,8 @@ Step 2. run preprocess_valid.m
 Step 3. run training_googlenet.m   
   
 說明:  
-Step 1及Step 2對影像進行前處理，用來產生欲訓練model所需的檔案；Step 3用來訓練model
-其中training_googlenet.m所使用的pretrained model是[googlenet](https://www.mathworks.com/help/deeplearning/ref/googlenet.html)
+Step 1 及 Step 2 對影像進行前處理，用來產生欲訓練 model 所需的檔案；Step 3用來訓練 model  
+其中 training_googlenet.m 所使用的 pretrained model 是 [googlenet](https://www.mathworks.com/help/deeplearning/ref/googlenet.html)
 1. [hyperparameter](https://www.mathworks.com/help/deeplearning/ref/trainingoptions.html):  
 - MiniBatchSize: 32  
 - MaxEpochs: 20  
