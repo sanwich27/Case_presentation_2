@@ -3,9 +3,6 @@
 %% Load Pretrained Network
 net = googlenet;
 
-%% Analyze Pretrained Network
-analyzeNetwork(net)
-
 %% Check Input Image Size
 inputSize = net.Layers(1).InputSize
 
@@ -19,9 +16,10 @@ numTrainFiles = fix(min_labelCount*train_ratio);
 [imdsTrain,imdsValidation] = splitEachLabel(imds,numTrainFiles,'randomize');
 imageAugmenter = imageDataAugmenter( ...
     'RandXReflection',true, ...
-    'RandRotation',[-20 20], ...
-    'RandXTranslation',[-10 10], ...
-    'RandYTranslation',[-10 10])
+    'RandScale', [1 1.2], ...
+    'RandXTranslation',[-20 20], ...
+    'RandYTranslation',[-20 20], ...
+    'RandRotation',[-20 20])
 augimdsTrain = augmentedImageDatastore(inputSize(1:2),imdsTrain,'DataAugmentation',imageAugmenter);
 
 %% Replace Final Layers
@@ -42,21 +40,17 @@ options = trainingOptions('sgdm', ...
     'InitialLearnRate',1e-3, ...
     'LearnRateSchedule','piecewise', ...
     'LearnRateDropPeriod',4, ...
-    'LearnRateDropFactor',0.1, ...
+    'L2Regularization',0.1,...    
     'Shuffle','every-epoch', ...
     'ValidationData',imdsValidation, ...
     'ValidationFrequency',3, ...
     'Verbose',false, ...
     'Plots','training-progress');
 
-
 %% Start Training Transfer Network
 tic;
-netTransfer = trainNetwork(augimdsTrain,lgraph,options);
+netTransfer = trainNetwork(imdsTrain,lgraph,options);
 toc;
-%% save model
-goo_32_20_3_schedule4_54 = netTransfer;
-save goo_32_20_3_schedule4_54
 %% Generate validation result
 imds_output = dcm2datastore_valid(pwd,'.dcm',0);
 YPred = classify(netTransfer,imds_output);
@@ -79,5 +73,6 @@ for i = 1:length(B.FileID)
     end    
 end
 writetable(B,'sample_submission_prac.csv')
-%% DeepNetworkDesigner
-deepNetworkDesigner
+%% save model
+testing = netTransfer;
+save testing
