@@ -17,7 +17,8 @@ Step 2. run preprocess_valid.m
 Step 3. run training_googlenet.m   
   
 說明:  
-Step 1 及 Step 2 對影像進行前處理，用來產生欲訓練 model 所需的檔案；Step 3用來訓練 model  
+Step 1 及 Step 2 對影像進行前處理，用來產生欲訓練 model 所需的檔案；Step 3用來訓練 model
+訓練完後會輸出 sample_submission_prac.csv 作為對 validation data 預測的結果
 其中 training_googlenet.m 所使用的 pretrained model 是 [googlenet](https://www.mathworks.com/help/deeplearning/ref/googlenet.html)
 1. [hyperparameter](https://www.mathworks.com/help/deeplearning/ref/trainingoptions.html):  
 - MiniBatchSize: 32  
