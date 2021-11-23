@@ -1,4 +1,4 @@
-# Case_presentation_2
+# Case Presentation 1 of YM_3 Fighters of Digit Medicine
 
 ### [task](https://www.kaggle.com/c/digital-medicine-2021-case-presentation-2/leaderboard)  
 Topic: COVID-19 Detection (to classify the typical / atypical pneumonia)  
