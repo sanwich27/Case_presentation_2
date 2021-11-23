@@ -14,8 +14,9 @@ prerequisite toolbox: image processing toolbox, deep learning toolbox
 
 Usage
 -----
-將本repository中所有 .m 檔(共 5 個)放入 kaggle 上下載下來的 data folder 即可運作 (/digital-medicine-2021-case-presentation-2)  
-所有程式讀取檔案的路徑都是寫死的，請確保在本層沒有新增額外的資料夾  
+Put the data folder downloaded on kaggle into all .m files (5 in total) in this repository to work
+-  data: digital-medicine-2021-case-presentation-2
+-  The paths of all programs to read files are hard-coded, please make sure that no additional folders are added to this layer before execution  
 
 Process
 -----
@@ -27,7 +28,7 @@ Illustrate:
 -----
 Preprocess: Step 1 & Step 2
 - Step 1 and Step 2 pre-process the image to generate the files needed to train the model
-Step 1 及 Step 2 對影像進行前處理，用來產生欲訓練 model 所需的檔案；
+
 Training model: Step 3
 - After training, sample_submission_prac.csv will be output as the result of the prediction of validation data
 - The pretrained model used by training_googlenet.m is [googlenet]
