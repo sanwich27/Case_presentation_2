@@ -2,7 +2,7 @@
 
 Team member: Tsai, W.X., Liu, X.Y., Li, B.Y., Ting, Y.C.
 
-### [task](https://www.kaggle.com/c/digital-medicine-2021-case-presentation-2/leaderboard)  
+### [Task](https://www.kaggle.com/c/digital-medicine-2021-case-presentation-2/leaderboard)  
 Topic: COVID-19 Detection (to classify the typical / atypical pneumonia)  
 
 ![Task](https://github.com/sanwich27/Case_presentation_2/blob/main/task.jpg)  
